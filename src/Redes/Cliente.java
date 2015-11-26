@@ -1,14 +1,14 @@
-package Cliente;
+package Redes;
 
 import java.io.BufferedReader;
-
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.util.Scanner;
+
 import javax.swing.JOptionPane;
+
+import Entidades.IP;
 
 public class Cliente implements Runnable{
  
@@ -17,21 +17,24 @@ public class Cliente implements Runnable{
 		private BufferedReader in;
 		private PrintStream out;
  
+		private IP ip;
+		
 		private boolean inicializado;
 		private boolean executando;
  
 		private Thread  thread;
  
-		public Cliente(InetAddress endereco, int porta) throws Exception{
+		public Cliente(IP ipParametro) throws Exception{
+			ip = ipParametro;
 			inicializado = false;
 			executando   = false;
-  
-			open(endereco, porta);
+		
+			open();
 		}
  
-		private void open(InetAddress endereco, int porta) throws Exception{
+		private void open() throws Exception{
 			try {
-				socket = new Socket(endereco, porta); 
+				socket = new Socket(ip.getIp(), ip.getPorta()); 
 				
 				in  = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				out = new PrintStream(socket.getOutputStream());
@@ -41,7 +44,6 @@ public class Cliente implements Runnable{
 			catch (Exception e) {
 				System.out.println(" Servidores não encontrados em rede ");
 				close();
-				//throw e;
 			}
 		}
  
@@ -78,6 +80,8 @@ public class Cliente implements Runnable{
 			in     = null;
 			out    = null;
 			socket = null;
+			
+			ip = null;
   
 			inicializado = false;
 			executando   = false;
@@ -150,57 +154,5 @@ public class Cliente implements Runnable{
 			close();
 		}
  
-		public static void main(String[] args) throws Exception {
-  
-			System.out.println("Iniciando cliente ...");
-			System.out.println("< Tradutor de palavras >");
-			System.out.println(" *Portugues* >>> *Ingles* ");
-			boolean sair = false;
-			Scanner scanner;//= new Scanner(System.in);
-			String mensagem = null;
-		 
-			do{	
-				PacketUDP paquete = new PacketUDP();
-				
-				paquete.start();
-				paquete.stop();
-				
-				if(PacketUDP.ip!=null && PacketUDP.porta!=0){
-					System.out.println("Servidor encontrado. Conexão feita!");
-					Cliente cliente = new Cliente(PacketUDP.ip, PacketUDP.porta);
-					cliente.start();
-					PacketUDP.ip=null;
-					PacketUDP.porta=0;
-					scanner = new Scanner(System.in);
-					if(mensagem!=null){
-						cliente.send(mensagem);
-					}
-			 
-					System.out.println("Digite uma palavra: ");
-					while (cliente.isInicializado()){
-						
-					 
-					  mensagem = scanner.nextLine();
-					 
-					 
-					 if (!cliente.isExecutando() ) {
-						 System.out.println("Conexão perdida...");  
-						 break;
-						 }
-					 
-					 cliente.send(mensagem);
-					
-	   
-					 if ("FIM".equalsIgnoreCase(mensagem)){
-						 System.out.println("Encerrando cliente ...");   
-						 sair = true;
-						 cliente.stop();
-						 scanner.close();
-						 break;}
-			
-					}
-			 
-				}		
-			}while(!sair);
-		}
+		
 	}

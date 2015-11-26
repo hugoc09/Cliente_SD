@@ -1,4 +1,4 @@
-package Cliente;
+package Redes;
 
 
 import java.io.IOException;
@@ -6,7 +6,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
-import java.util.regex.Pattern;
+
+import Entidades.IP;
+import Negocios.Pesquisa;
 
 public class PacketUDP implements Runnable{
 	
@@ -15,17 +17,16 @@ public class PacketUDP implements Runnable{
 	private DatagramPacket pkgEnviado;
 	private DatagramPacket pkgRecebido;
 	
-	
-	static InetAddress ip;
-	static int porta;
+	static IP ip;
+	private Control control;
 	
 	private boolean inicializado;
-
 	private boolean executando;
 
 	private Thread  thread;
 	
 	public PacketUDP() throws Exception{
+		control = new Pesquisa();
 		inicializado = false;
 		executando   = false;
 
@@ -35,20 +36,13 @@ public class PacketUDP implements Runnable{
 	private void open() {
 		try {
 			clientSocket = new DatagramSocket(); 
-			//clientSocket.setBroadcast(true);
-			
-			InetAddress addr = InetAddress.getByName("192.168.1.106");
-			
-			String msgEnviada = "ola";
-			pkgEnviado = new DatagramPacket(msgEnviada.getBytes(),msgEnviada.length(), addr, 2526);
-			clientSocket.send(pkgEnviado);
+		
+			enviarMsg();
 			
 			inicializado = true;
 		}
 		catch (Exception e) {
-			//System.out.println("Nenhum servidor encontrado em rede ");
 			close();
-			//throw e;
 		}
 	}
 	
@@ -63,18 +57,16 @@ public class PacketUDP implements Runnable{
 			}
 		}
 
-		
-		
 		pkgEnviado   = null;
 		pkgRecebido  = null;
 		clientSocket = null;
-
+		
+		control = null;
+		
 		inicializado = false;
 		executando   = false;
 
 		thread = null;
-		
-		
 
 	}
 	
@@ -96,6 +88,23 @@ public class PacketUDP implements Runnable{
 		}
 	}
 	
+	private void enviarMsg(){
+		
+		try {
+			InetAddress addr = InetAddress.getByName("192.168.1.106"); // configurar IP do DNS
+			
+			byte[] msgEnviada = new byte[1024];
+			pkgEnviado = new DatagramPacket(msgEnviada, msgEnviada.length, addr, 2526);
+			this.clientSocket.send(pkgEnviado);
+			
+			System.out.println("Brodcast servidores feito!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	@Override
 	public void run() {
 
@@ -109,28 +118,14 @@ public class PacketUDP implements Runnable{
 		 	clientSocket.receive(pkgRecebido); 
 		 	
 		 	String s = new String(pkgRecebido.getData());
-		
-			String argumentos[] = s.split(Pattern.quote(";"));
 			
-			//Mostra no video
-			System.out.println("Datagrama UDP recebido: " + argumentos[0] + argumentos[1] );
-			
-			String a = argumentos[0];
-			String b = argumentos[1];
-			
-			
-		 	ip = InetAddress.getByName(a);
-		 	
-		 	porta = Integer.parseInt(b);
-			
-		 	
-		 	
+			ip = control.pegarIP(s);
+			 	
 		} catch (SocketTimeoutException g) {
 			System.out.println("Servidores Offline");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		
 		close();	
 	}
