@@ -137,7 +137,7 @@ public class Cliente implements Runnable{
 					System.out.println(
 							"Tradução recebida do servidor: " +
 									mensagem);
-					System.out.println("Digite uma palavra: ");
+					//System.out.println("Digite uma palavra: ");
    
 				}
 				catch (SocketTimeoutException e) {
