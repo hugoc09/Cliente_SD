@@ -1,13 +1,13 @@
 package Negocios;
 
-import Redes.Cliente;
+import Redes.Cliente_SD;
 import Ui.ControlCliente;
 
 public class Requisicao implements ControlCliente {
 
-	private Cliente cliente;
+	private Cliente_SD cliente;
 	
-	public Requisicao(Cliente clienteParametro){
+	public Requisicao(Cliente_SD clienteParametro){
 		cliente = clienteParametro;
 	}
 	

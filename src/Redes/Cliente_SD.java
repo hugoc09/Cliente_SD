@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import Entidades.IP;
 
-public class Cliente implements Runnable{
+public class Cliente_SD implements Runnable{
  
 		private Socket socket;
  
@@ -24,7 +24,7 @@ public class Cliente implements Runnable{
  
 		private Thread  thread;
  
-		public Cliente(IP ipParametro) throws Exception{
+		public Cliente_SD(IP ipParametro) throws Exception{
 			ip = ipParametro;
 			inicializado = false;
 			executando   = false;

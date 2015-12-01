@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 
 import Entidades.IP;
+import Exceptions.ServidoresOfflineExceptions;
 import Negocios.Pesquisa;
 
 public class PacketUDP implements Runnable{
