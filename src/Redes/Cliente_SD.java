@@ -8,6 +8,7 @@ import java.net.SocketTimeoutException;
 
 import javax.swing.JOptionPane;
 
+import Ui.TelaPrincipal;
 import Entidades.IP;
 
 public class Cliente_SD implements Runnable{
@@ -127,7 +128,7 @@ public class Cliente_SD implements Runnable{
 			while (executando) {
 				try {
 					socket.setSoTimeout(3000);
-    
+					
 					String mensagem = in.readLine();
     
 					if (mensagem == null) {
@@ -138,7 +139,8 @@ public class Cliente_SD implements Runnable{
 							"Tradução recebida do servidor: " +
 									mensagem);
 					//System.out.println("Digite uma palavra: ");
-   
+						TelaPrincipal.Logs.append(mensagem+"\n");
+						
 				}
 				catch (SocketTimeoutException e) {
 					// Ignorar

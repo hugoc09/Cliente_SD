@@ -224,7 +224,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private java.awt.Choice Linguagem1;
     private java.awt.Choice Linguagem2;
-    private javax.swing.JTextArea Logs;
+    public static javax.swing.JTextArea Logs;
     private javax.swing.JTextField PalavraParaTraduzir;
     private javax.swing.JButton Traduzir;
     private javax.swing.JLabel jLabel1;
@@ -276,7 +276,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     	String menssagem = traduzir+";"+l1+";"+l2+";";
     	
     	 control.enviarMsg(menssagem);
-    	Logs.append(menssagem);
+    	
     	
     	
     }
