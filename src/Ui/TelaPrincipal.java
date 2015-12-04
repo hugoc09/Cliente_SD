@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -21,6 +22,11 @@ import javax.swing.JTextArea;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Entidades.IP;
+import Negocios.Requisicao;
+import Redes.Cliente_SD;
+
 import javax.swing.JTextPane;
 
 /**
@@ -29,11 +35,15 @@ import javax.swing.JTextPane;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+	
+	private ControlCliente  control;
+	
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaPrincipal(Cliente_SD clienteParametro) {
         initComponents();
+        control = new Requisicao(clienteParametro);
     }
 
     public void Traduzir() throws UnknownHostException, IOException{
@@ -42,26 +52,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     	String traduzir = PalavraParaTraduzir.getText();
     	String l1 = Linguagem1.getSelectedItem();
     	String l2 = Linguagem2.getSelectedItem();
-    	String mensagem = traduzir+";"+l1+";"+l2+";";
+    	String menssagem = traduzir+";"+l1+";"+l2+";";
     	
-Socket socket = null;
+    	control.enviarMsg(menssagem);
+    	
+    	//Socket socket = null;
 		
-		socket = new Socket("192.168.0.101", 2525);
+		//socket = new Socket("192.168.1.102", 2525);
 		
-	InputStream input = socket.getInputStream();
-	OutputStream output = socket.getOutputStream();
+		//InputStream input = socket.getInputStream();
+		//OutputStream output = socket.getOutputStream();
 	
-	BufferedReader in = new BufferedReader(new InputStreamReader(input));
-	PrintStream out = new PrintStream(output);
+		//BufferedReader in = new BufferedReader(new InputStreamReader(input));
+		//PrintStream out = new PrintStream(output);
 
-		out.println(mensagem);
-		mensagem = in.readLine();
-		System.out.println(mensagem);
+		//out.println(mensagem);
+		//mensagem = in.readLine();
+		//System.out.println(mensagem);
 		
-		JLabel label = new JLabel("");
-		getContentPane().add(label);
-		label.setText(mensagem);
-		JTextArea Logs = new JTextArea(mensagem);
+		//JLabel label = new JLabel("");
+		//getContentPane().add(label);
+		//label.setText(menssagem);
+		//JTextArea Logs = new JTextArea(menssagem);
 		
     	
 	}
@@ -212,13 +224,20 @@ Socket socket = null;
 
     /**
      * @param args the command line arguments
+     * @throws Exception 
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+    	InetAddress enderecoIP = InetAddress.getByName("192.168.43.126");
+    	IP ip = new IP(enderecoIP, 2525);
+    	final Cliente_SD cliente = new Cliente_SD(ip);
+    	cliente.start();
+    	
+    	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -240,7 +259,7 @@ Socket socket = null;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                new TelaPrincipal(cliente).setVisible(true);
             }
         });
     }
