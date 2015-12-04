@@ -14,6 +14,6 @@ public class Requisicao implements ControlCliente {
 	@Override
 	public void enviarMsg(String menssagem) {
 		cliente.send(menssagem);
-	}
+		}
 
 }
