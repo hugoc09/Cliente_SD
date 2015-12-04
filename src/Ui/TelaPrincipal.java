@@ -5,29 +5,13 @@
  */
 package Ui;
 
-import java.awt.Component;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
-
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Entidades.IP;
 import Negocios.Requisicao;
 import Redes.Cliente_SD;
-
-import javax.swing.JTextPane;
 
 /**
  *
@@ -35,53 +19,15 @@ import javax.swing.JTextPane;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-	
-	private ControlCliente  control;
-	
     /**
      * Creates new form TelaPrincipal
      */
+	private ControlCliente  control;
     public TelaPrincipal(Cliente_SD clienteParametro) {
         initComponents();
         control = new Requisicao(clienteParametro);
     }
 
-    public void Traduzir() throws UnknownHostException, IOException{
-    	
-	
-    	String traduzir = PalavraParaTraduzir.getText();
-    	String l1 = Linguagem1.getSelectedItem();
-    	String l2 = Linguagem2.getSelectedItem();
-    	String menssagem = traduzir+";"+l1+";"+l2+";";
-    	
-    	control.enviarMsg(menssagem);
-    	
-    	//Socket socket = null;
-		
-		//socket = new Socket("192.168.1.102", 2525);
-		
-		//InputStream input = socket.getInputStream();
-		//OutputStream output = socket.getOutputStream();
-	
-		//BufferedReader in = new BufferedReader(new InputStreamReader(input));
-		//PrintStream out = new PrintStream(output);
-
-		//out.println(mensagem);
-		//mensagem = in.readLine();
-		//System.out.println(mensagem);
-		
-		//JLabel label = new JLabel("");
-		//getContentPane().add(label);
-		//label.setText(menssagem);
-		//JTextArea Logs = new JTextArea(menssagem);
-		
-    	
-	}
-		
-        
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +36,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Logs = new javax.swing.JTextArea();
         PalavraParaTraduzir = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -102,13 +51,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        Logs.setColumns(20);
+        Logs.setRows(5);
+        jScrollPane2.setViewportView(Logs);
+
         PalavraParaTraduzir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PalavraParaTraduzirActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Digite a palavra a ser traduzida");
+        jLabel1.setText("Palavra a ser Traduzida:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setText("Tradutor");
@@ -119,17 +72,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel5.setText("Para:");
 
-        Linguagem1.add("pt");
-        Linguagem1.add("en");
-        Linguagem1.add("fr");
-        Linguagem1.add("it");
-        Linguagem1.add("es");
+        Linguagem1.add("Português");
+        Linguagem1.add("Inglês");
+        Linguagem1.add("Francês");
+        Linguagem1.add("Italiano");
+        Linguagem1.add("Espanhol");
 
-        Linguagem2.add("pt");
-        Linguagem2.add("en");
-        Linguagem2.add("fr");
-        Linguagem2.add("it");
-        Linguagem2.add("es");
+        Linguagem2.add("Português");
+        Linguagem2.add("Inglês");
+        Linguagem2.add("Francês");
+        Linguagem2.add("Italiano");
+        Linguagem2.add("Espanhol");
 
         Traduzir.setText("Traduzir");
         Traduzir.addActionListener(new java.awt.event.ActionListener() {
@@ -147,75 +100,80 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(4)
-        					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(PalavraParaTraduzir, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(layout.createSequentialGroup()
-        							.addGap(69)
-        							.addComponent(jLabel3))
-        						.addGroup(layout.createSequentialGroup()
-        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        								.addGroup(layout.createSequentialGroup()
-        									.addComponent(Linguagem1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        									.addComponent(Linguagem2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        								.addGroup(layout.createSequentialGroup()
-        									.addComponent(jLabel4)
-        									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        									.addComponent(jLabel5)))
-        							.addGap(22))))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(232)
-        					.addComponent(jLabel2)))
-        			.addContainerGap(87, Short.MAX_VALUE))
-        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        			.addContainerGap(369, Short.MAX_VALUE)
-        			.addComponent(Traduzir)
-        			.addGap(95))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PalavraParaTraduzir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Linguagem1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Linguagem2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5)))
+                                .addGap(22, 22, 22))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addComponent(jLabel2)))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Traduzir)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addComponent(jLabel2)
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(18)
-        						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        							.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(PalavraParaTraduzir, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(28)
-        						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        							.addComponent(jLabel4)
-        							.addComponent(jLabel5))
-        						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        						.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        							.addComponent(Linguagem1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(Linguagem2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(7)
-        					.addComponent(jLabel3)))
-        			.addGap(18, 18, Short.MAX_VALUE)
-        			.addComponent(Traduzir)
-        			.addGap(34))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PalavraParaTraduzir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(28, 28, 28)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Linguagem1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Linguagem2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Traduzir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>                        
 
-    private void TraduzirActionPerformed(java.awt.event.ActionEvent evt) throws UnknownHostException, IOException {                                         
-       Traduzir();
+    private void TraduzirActionPerformed(java.awt.event.ActionEvent evt) throws UnknownHostException, IOException{                                         
+    	  Traduzir();
     }                                        
 
     private void PalavraParaTraduzirActionPerformed(java.awt.event.ActionEvent evt) {                                                    
@@ -232,11 +190,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    	InetAddress enderecoIP = InetAddress.getByName("192.168.43.126");
+    	InetAddress enderecoIP = InetAddress.getByName("192.168.0.102");
     	IP ip = new IP(enderecoIP, 2525);
     	final Cliente_SD cliente = new Cliente_SD(ip);
     	cliente.start();
-    	
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -267,6 +224,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private java.awt.Choice Linguagem1;
     private java.awt.Choice Linguagem2;
+    private javax.swing.JTextArea Logs;
     private javax.swing.JTextField PalavraParaTraduzir;
     private javax.swing.JButton Traduzir;
     private javax.swing.JLabel jLabel1;
@@ -274,4 +232,53 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane2;
+    // End of variables declaration                   
+    
+    public void Traduzir()throws UnknownHostException, IOException{
+    	
+    	String traduzir = PalavraParaTraduzir.getText();
+    	String l1="";
+    	String l2="";
+    	if(Linguagem1.getSelectedItem().equals("Português")){
+    		l1="pt";
+    	}
+    	if(Linguagem1.getSelectedItem().equals("Inglês")){
+    		l1="en";
+    	}
+    	if(Linguagem1.getSelectedItem().equals("Francês")){
+    		l1="fr";
+    	}
+    	if(Linguagem1.getSelectedItem().equals("Italiano")){
+    		l1="it";
+    	}
+    	if(Linguagem1.getSelectedItem().equals("Espanhol")){
+    		l1="es";
+    	}
+    	if(Linguagem2.getSelectedItem().equals("Português")){
+    		l2="pt";
+    	}
+    	if(Linguagem2.getSelectedItem().equals("Inglês")){
+    		l2="en";
+    	}
+    	if(Linguagem2.getSelectedItem().equals("Francês")){
+    		l2="fr";
+    	}
+    	if(Linguagem2.getSelectedItem().equals("Italiano")){
+    		l2="it";
+    	}
+    	if(Linguagem2.getSelectedItem().equals("Espanhol")){
+    		l2="es";
+    	}
+    	
+    	
+    	 
+    	String menssagem = traduzir+";"+l1+";"+l2+";";
+    	
+    	 control.enviarMsg(menssagem);
+    	Logs.append(menssagem);
+    	
+    	
+    }
+    
 }
