@@ -55,7 +55,7 @@ public class Cliente_SD implements Runnable{
 				}
 				catch (Exception e){
 					
-					System.out.println(e);
+					System.out.println("1");
 				}
 			}
 
@@ -65,7 +65,7 @@ public class Cliente_SD implements Runnable{
 				}
 				catch (Exception e){
 					
-					System.out.println(e);
+					System.out.println("2");
 				}
 			}
 
@@ -74,7 +74,7 @@ public class Cliente_SD implements Runnable{
 					socket.close();
 				}
 				catch (Exception e){
-					System.out.println(e);
+					System.out.println("3");
 				}
 			}
   
@@ -118,7 +118,12 @@ public class Cliente_SD implements Runnable{
 		}
  
 		public void send(String mensagem) {
-			out.println(mensagem);
+			try {
+				out.println(mensagem);
+			} catch (Exception e) {
+				System.out.println("Você não possui conexão");
+			}
+			
 		}
  
  
