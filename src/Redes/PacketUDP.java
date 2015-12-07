@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 
 import Entidades.IP;
-import Exceptions.ServidoresOfflineExceptions;
 import Negocios.Pesquisa;
 
 public class PacketUDP implements Runnable{
@@ -18,7 +17,7 @@ public class PacketUDP implements Runnable{
 	private DatagramPacket pkgEnviado;
 	private DatagramPacket pkgRecebido;
 	
-	static IP ip;
+	public static IP ip;
 	private Control control;
 	
 	private boolean inicializado;
@@ -92,13 +91,11 @@ public class PacketUDP implements Runnable{
 	private void enviarMsg(){
 		
 		try {
-			InetAddress addr = InetAddress.getByName("192.168.0.102"); // configurar IP do DNS
+			InetAddress addr = InetAddress.getByName("192.168.1.100"); // CONFIGURAR IP DNS
 			
 			byte[] msgEnviada = new byte[1024];
 			pkgEnviado = new DatagramPacket(msgEnviada, msgEnviada.length, addr, 2526);
 			this.clientSocket.send(pkgEnviado);
-			
-			System.out.println("Brodcast servidores feito!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

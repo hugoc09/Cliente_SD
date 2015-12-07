@@ -17,13 +17,15 @@ public class Pesquisa implements Control{
 		try {
 		String argumentos[] = s.split(Pattern.quote(";"));
 		//Mostra no video
-		System.out.println("Datagrama UDP recebido: " + argumentos[0] + argumentos[1]);
+		System.out.println("Datagrama UDP recebido: " + argumentos[0] + ":" + argumentos[1]);
 		
-		String a = argumentos[0];
-	 	String b = argumentos[1];
+		String c = argumentos[0];
+		
+		InetAddress a = InetAddress.getByName(c); 
+	 	int b = Integer.parseInt(argumentos[1]);
 	
-	 	r.setIp(InetAddress.getByName(a));
-	 	r.setPorta(Integer.parseInt(b));
+	 	r.setIp(a);
+	 	r.setPorta(b);
 		
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

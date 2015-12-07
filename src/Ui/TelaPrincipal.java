@@ -10,7 +10,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import Entidades.IP;
-import Negocios.Requisicao;
+import Negocios.Controlador;
 import Redes.Cliente_SD;
 
 /**
@@ -22,10 +22,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-	private ControlCliente  control;
-    public TelaPrincipal(Cliente_SD clienteParametro) {
+	
+	ControlCliente  control;
+	
+    public TelaPrincipal() {
         initComponents();
-        control = new Requisicao(clienteParametro);
+        
+        control = new Controlador();
     }
 
     /**
@@ -190,10 +193,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    	InetAddress enderecoIP = InetAddress.getByName("192.168.0.102");
-    	IP ip = new IP(enderecoIP, 2525);
-    	final Cliente_SD cliente = new Cliente_SD(ip);
-    	cliente.start();
     	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -216,7 +215,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal(cliente).setVisible(true);
+                new TelaPrincipal().setVisible(true);
             }
         });
     }
@@ -270,12 +269,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     	if(Linguagem2.getSelectedItem().equals("Espanhol")){
     		l2="es";
     	}
-    	
-    	
     	 
     	String menssagem = traduzir+";"+l1+";"+l2+";";
     	
-    	 control.enviarMsg(menssagem);
+    	if(!control.statusConexao()){
+    		control.buscarIp();
+    	}else{
+    		control.enviarMsg(menssagem);
+    	}
+    	
     	
     	
     	
