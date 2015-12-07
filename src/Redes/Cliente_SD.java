@@ -5,9 +5,6 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.rmi.server.LogStream;
-
-import javax.swing.JOptionPane;
 
 import Ui.TelaPrincipal;
 import Entidades.IP;
@@ -161,7 +158,10 @@ public class Cliente_SD implements Runnable{
 					break;
 				}
 			}
-			close();
+			
+			System.out.println("Conexão com servidor perdida."); // Esse que está pegando!
+			close();											// Ele não esta caindo mais no Exception
+			
 		}
  
 		

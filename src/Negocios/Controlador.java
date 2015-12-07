@@ -1,12 +1,9 @@
 package Negocios;
 
-import java.net.InetAddress;
-
 import Entidades.IP;
 import Redes.Cliente_SD;
 import Redes.PacketUDP;
 import Ui.ControlCliente;
-import Ui.TelaPrincipal;
 
 public class Controlador implements ControlCliente {
 
@@ -49,9 +46,9 @@ public class Controlador implements ControlCliente {
 			packetUDP.start();
 			packetUDP.stop();
 			
-			}while(PacketUDP.ip==null);
+			}while(packetUDP.getIp() == null);
 			
-			inicializar(PacketUDP.ip);
+			inicializar(packetUDP.getIp());
 			
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -9,7 +9,6 @@ import java.net.SocketTimeoutException;
 
 import Entidades.IP;
 import Negocios.Pesquisa;
-import Ui.TelaPrincipal;
 
 public class PacketUDP implements Runnable{
 	
@@ -18,7 +17,7 @@ public class PacketUDP implements Runnable{
 	private DatagramPacket pkgEnviado;
 	private DatagramPacket pkgRecebido;
 
-	public static IP ip;
+	private IP ip;
 	private Control control;
 	
 	private boolean inicializado;
@@ -92,7 +91,7 @@ public class PacketUDP implements Runnable{
 	private void enviarMsg(){
 		
 		try {
-			InetAddress addr = InetAddress.getByName("192.168.50.26"); // CONFIGURAR IP DNS
+			InetAddress addr = InetAddress.getByName("192.168.1.102"); // CONFIGURAR IP DNS
 			
 			byte[] msgEnviada = new byte[1024];
 			pkgEnviado = new DatagramPacket(msgEnviada, msgEnviada.length, addr, 2526);
@@ -104,6 +103,14 @@ public class PacketUDP implements Runnable{
 		
 	}
 	
+	public IP getIp() {
+		return ip;
+	}
+
+	public void setIp(IP ip) {
+		this.ip = ip;
+	}
+
 	@Override
 	public void run() {
 
