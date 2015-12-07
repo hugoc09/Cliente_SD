@@ -272,9 +272,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     	 
     	String menssagem = traduzir+";"+l1+";"+l2+";";
     	
-    	if(!control.statusConexao()){
+    	if(control.statusConexao()){
+    		control.enviarMsg(menssagem);
     		control.buscarIp();
     	}else{
+    		control.buscarIp();
     		control.enviarMsg(menssagem);
     	}
     	
