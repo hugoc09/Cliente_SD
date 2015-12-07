@@ -6,6 +6,7 @@ import Entidades.IP;
 import Redes.Cliente_SD;
 import Redes.PacketUDP;
 import Ui.ControlCliente;
+import Ui.TelaPrincipal;
 
 public class Controlador implements ControlCliente {
 

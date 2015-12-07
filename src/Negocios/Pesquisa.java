@@ -25,7 +25,7 @@ public class Pesquisa implements Control{
 		
 		
 	 	int b = Integer.parseInt(argumentos[1]);
-	 	//System.out.println("sdfsddddddddddddddd:  "+InetAddress.getByName(c));
+	 	
 	 	r.setIp(a);
 	 	r.setPorta(b);
 		} catch (Exception e) {

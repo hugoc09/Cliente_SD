@@ -9,6 +9,7 @@ import java.net.SocketTimeoutException;
 
 import Entidades.IP;
 import Negocios.Pesquisa;
+import Ui.TelaPrincipal;
 
 public class PacketUDP implements Runnable{
 	
@@ -123,7 +124,7 @@ public class PacketUDP implements Runnable{
 			 
 		 	
 		} catch (SocketTimeoutException g) {
-			System.out.println("Seridores Offline");
+			System.out.println("Servidores Offline");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
