@@ -89,7 +89,7 @@ public class Controlador implements ControlCliente {
 			System.out.println("Inicializando Conexão com o servidor...");
 			cliente = new Cliente_SD(ipParametro);
 			cliente.start();
-			System.out.println("Coneção realizada com sucesso!");
+			System.out.println("Conexão realizada com sucesso!");
 			
 			} catch (Exception e) {
 				e.printStackTrace();

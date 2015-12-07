@@ -91,7 +91,7 @@ public class PacketUDP implements Runnable{
 	private void enviarMsg(){
 		
 		try {
-			InetAddress addr = InetAddress.getByName("192.168.0.102"); // CONFIGURAR IP DNS
+			InetAddress addr = InetAddress.getByName("192.168.50.26"); // CONFIGURAR IP DNS
 			
 			byte[] msgEnviada = new byte[1024];
 			pkgEnviado = new DatagramPacket(msgEnviada, msgEnviada.length, addr, 2526);
