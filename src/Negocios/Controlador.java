@@ -1,5 +1,7 @@
 package Negocios;
 
+import java.net.InetAddress;
+
 import Entidades.IP;
 import Redes.Cliente_SD;
 import Redes.PacketUDP;

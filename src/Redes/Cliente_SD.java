@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.rmi.server.LogStream;
 
 import javax.swing.JOptionPane;
 
@@ -43,7 +44,8 @@ public class Cliente_SD implements Runnable{
 				inicializado = true;
 			}
 			catch (Exception e) {
-				System.out.println(" Servidores não encontrados em rede ");
+				TelaPrincipal.Logs.append("Não há nenhum servidor de Tradução on-line"+"\n");
+				//System.out.println(" Servidores não encontrados em rede ");
 				close();
 			}
 		}
@@ -151,10 +153,11 @@ public class Cliente_SD implements Runnable{
 					// Ignorar
 				}
 				catch (Exception e) {
-					  Object[] options = { "OK"};
-				      JOptionPane.showOptionDialog(null, "Conexão com servidor perdida. O servidor remoto foi desligado inesperadamente.", "Aviso",
-				          JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-				              null, options, options[0]);
+					TelaPrincipal.Logs.append("Conexão com servidor perdida. O servidor remoto foi desligado inesperadamente."+"\n");
+					//  Object[] options = { "OK"};
+				      //JOptionPane.showOptionDialog(null, "Conexão com servidor perdida. O servidor remoto foi desligado inesperadamente.", "Aviso",
+				        //  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+				          //    null, options, options[0]);
 					break;
 				}
 			}

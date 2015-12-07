@@ -16,7 +16,7 @@ public class PacketUDP implements Runnable{
 	 
 	private DatagramPacket pkgEnviado;
 	private DatagramPacket pkgRecebido;
-	
+
 	public static IP ip;
 	private Control control;
 	
@@ -91,7 +91,7 @@ public class PacketUDP implements Runnable{
 	private void enviarMsg(){
 		
 		try {
-			InetAddress addr = InetAddress.getByName("192.168.1.100"); // CONFIGURAR IP DNS
+			InetAddress addr = InetAddress.getByName("192.168.0.102"); // CONFIGURAR IP DNS
 			
 			byte[] msgEnviada = new byte[1024];
 			pkgEnviado = new DatagramPacket(msgEnviada, msgEnviada.length, addr, 2526);
@@ -115,12 +115,15 @@ public class PacketUDP implements Runnable{
 		 	
 		 	clientSocket.receive(pkgRecebido); 
 		 	
+		 	
+		 	
 		 	String s = new String(pkgRecebido.getData());
 			
 			ip = control.pegarIP(s);
-			 	
+			 
+		 	
 		} catch (SocketTimeoutException g) {
-			System.out.println("Servidores Offline");
+			System.out.println("Seridores Offline");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
