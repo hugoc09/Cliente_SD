@@ -8,6 +8,7 @@ import java.net.SocketTimeoutException;
 
 import Ui.TelaPrincipal;
 import Entidades.IP;
+import Exceptions.ServidoresOfflineExceptions;
 
 public class Cliente_SD implements Runnable{
  
@@ -23,7 +24,7 @@ public class Cliente_SD implements Runnable{
  
 		private Thread  thread;
  
-		public Cliente_SD(IP ipParametro) throws Exception{
+		public Cliente_SD(IP ipParametro) throws Exception, ServidoresOfflineExceptions{
 			ip = ipParametro;
 			inicializado = false;
 			executando   = false;
@@ -41,9 +42,10 @@ public class Cliente_SD implements Runnable{
 				inicializado = true;
 			}
 			catch (Exception e) {
-				TelaPrincipal.Logs.append("Não há nenhum servidor de Tradução on-line"+"\n");
+				  close();
+				  throw new ServidoresOfflineExceptions(e);
+				//TelaPrincipal.Logs.append("Não há nenhum servidor de Tradução on-line"+"\n");
 				//System.out.println(" Servidores não encontrados em rede ");
-				close();
 			}
 		}
  

@@ -1,6 +1,7 @@
 package Negocios;
 
 import Entidades.IP;
+import Exceptions.ServidoresOfflineExceptions;
 import Redes.Cliente_SD;
 import Redes.PacketUDP;
 import Ui.ControlCliente;
@@ -16,7 +17,9 @@ public class Controlador implements ControlCliente {
 	
 	@Override
 	public void enviarMsg(String menssagem) {
+		if(statusConexao()){
 		cliente.send(menssagem);
+		}
 		}
 
 	@Override
@@ -39,14 +42,22 @@ public class Controlador implements ControlCliente {
 		
 		try {
 			
-			do{
-				
-			System.out.println("Buscando IP...");
+			//do{
+			for(int i=0;i <3; i++){
+			
+			System.out.println("Buscando IP..." + "tentativa: " + i++);
 			packetUDP = new PacketUDP();
 			packetUDP.start();
 			packetUDP.stop();
 			
-			}while(packetUDP.getIp() == null);
+			if(packetUDP.getIp() != null){
+				break;
+			}else if(i==2){
+				return;
+			}
+			
+			}
+			//}while(packetUDP.getIp() == null);
 			
 			inicializar(packetUDP.getIp());
 			
@@ -81,7 +92,7 @@ public class Controlador implements ControlCliente {
 	}
 
 
-	public void inicializar(IP ipParametro) {
+	public void inicializar(IP ipParametro) throws Exception {
 		
 		try {
 			System.out.println("Inicializando Conexão com o servidor...");
@@ -89,8 +100,8 @@ public class Controlador implements ControlCliente {
 			cliente.start();
 			System.out.println("Conexão realizada com sucesso!");
 			
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (ServidoresOfflineExceptions e) {
+				System.out.println("Servidores não encontrados em rede.");
 			}		
 		
 	}
