@@ -27,7 +27,10 @@ public class Controlador implements ControlCliente {
 		
 		try {
 			System.out.println("Encerrado conexão...");
+			if(cliente!=null){
+			enviarMsg("FIM");
 			cliente.stop();
+			}
 			System.out.println("Conexão encerrada com sucesso!");
 			
 			} catch (Exception e) {

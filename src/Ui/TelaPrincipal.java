@@ -199,7 +199,7 @@ ControlCliente  control;
   }                                                   
 
   private void SairActionPerformed(java.awt.event.ActionEvent evt) {                                     
-      
+      parar();
   }  
   
     /**
@@ -284,6 +284,13 @@ ControlCliente  control;
   	}
   		
   }
+  
+  public void parar() {
+	
+	  control.parar();
+	  System.exit(0);
+	  
+}
   
   
 
