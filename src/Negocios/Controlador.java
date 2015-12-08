@@ -42,22 +42,23 @@ public class Controlador implements ControlCliente {
 		
 		try {
 			
-			//do{
-			for(int i=0;i <3; i++){
+			for(int i=1; i<4; i++){
 			
-			System.out.println("Buscando IP..." + "tentativa: " + i++);
+			System.out.println("Buscando IP...");
+			System.out.print("Tentativa: " + i);
 			packetUDP = new PacketUDP();
 			packetUDP.start();
 			packetUDP.stop();
 			
 			if(packetUDP.getIp() != null){
 				break;
-			}else if(i==2){
+			}
+			
+			if(i==3){
 				return;
 			}
 			
 			}
-			//}while(packetUDP.getIp() == null);
 			
 			inicializar(packetUDP.getIp());
 			

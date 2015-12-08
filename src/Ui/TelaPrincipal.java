@@ -27,7 +27,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 	
     public TelaPrincipal() {
         initComponents();
-        
         control = new Controlador();
     }
 
@@ -278,9 +277,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     	   control.buscarIp();
     	   control.enviarMsg(menssagem);
     	}
-    	
-    	
-    	
     	
     }
     
