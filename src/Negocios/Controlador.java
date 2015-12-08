@@ -5,6 +5,7 @@ import Exceptions.ServidoresOfflineExceptions;
 import Redes.Cliente_SD;
 import Redes.PacketUDP;
 import Ui.ControlCliente;
+import Ui.TelaPrincipal;
 
 public class Controlador implements ControlCliente {
 
@@ -58,6 +59,7 @@ public class Controlador implements ControlCliente {
 			}
 			
 			if(i==3){
+				TelaPrincipal.Logs.append("Servidores Offline"+"\n");
 				return;
 			}
 			
