@@ -7,12 +7,9 @@ package Ui;
 
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import Entidades.IP;
 import Negocios.Controlador;
-import Redes.Cliente_SD;
 import java.awt.Font;
 
 /**
