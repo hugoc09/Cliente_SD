@@ -104,9 +104,17 @@ ControlCliente  control;
 				}
             }
         });
+        
+       
+        
 
         Sair.setText("Sair");
-
+        Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+					SairActionPerformed(evt);				
+        }});
+        
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,6 +198,10 @@ ControlCliente  control;
       // TODO add your handling code here:
   }                                                   
 
+  private void SairActionPerformed(java.awt.event.ActionEvent evt) {                                     
+      
+  }  
+  
     /**
      * @param args the command line arguments
      */
