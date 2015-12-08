@@ -15,12 +15,12 @@ public class Controlador implements ControlCliente {
 	public Controlador(){
 	}
 	
-	
 	@Override
 	public void enviarMsg(String menssagem) {
-		if(statusConexao()){
-		cliente.send(menssagem);
-		}
+		
+			if(statusConexao()){
+				cliente.send(menssagem);
+			}
 		}
 
 	@Override
