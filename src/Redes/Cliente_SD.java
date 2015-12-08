@@ -144,27 +144,19 @@ public class Cliente_SD implements Runnable{
 					System.out.println(
 							"Tradução recebida do servidor: " +
 									mensagem);
-					//System.out.println("Digite uma palavra: ");
-						TelaPrincipal.Logs.append(mensagem+"\n");
+					TelaPrincipal.Logs.append(mensagem+"\n");
 						
 				}
 				catch (SocketTimeoutException e) {
 					// Ignorar
 				}
 				catch (Exception e) {
-					TelaPrincipal.Logs.append("Conexão com servidor perdida. O servidor remoto foi desligado inesperadamente."+"\n");
-					//  Object[] options = { "OK"};
-				      //JOptionPane.showOptionDialog(null, "Conexão com servidor perdida. O servidor remoto foi desligado inesperadamente.", "Aviso",
-				        //  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-				          //    null, options, options[0]);
 					break;
 				}
 			}
 			
-			System.out.println("Conexão com servidor perdida."); // Esse que está pegando!
-			close();											// Ele não esta caindo mais no Exception
+			TelaPrincipal.Logs.append(" < Conexao Encerrada > " + "\n");
 			
+			close();				
 		}
- 
-		
 	}
