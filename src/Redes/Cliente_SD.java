@@ -44,8 +44,6 @@ public class Cliente_SD implements Runnable{
 			catch (Exception e) {
 				  close();
 				  throw new ServidoresOfflineExceptions(e);
-				//TelaPrincipal.Logs.append("Não há nenhum servidor de Tradução on-line"+"\n");
-				//System.out.println(" Servidores não encontrados em rede ");
 			}
 		}
  
