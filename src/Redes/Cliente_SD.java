@@ -53,8 +53,7 @@ public class Cliente_SD implements Runnable{
 					in.close();
 				}
 				catch (Exception e){
-					
-					System.out.println("1");
+					e.printStackTrace();
 				}
 			}
 
@@ -63,9 +62,7 @@ public class Cliente_SD implements Runnable{
 					out.close();
 				}
 				catch (Exception e){
-					
-					System.out.println("2");
-				}
+					e.printStackTrace();				}
 			}
 
 			if (socket != null) {
@@ -73,7 +70,7 @@ public class Cliente_SD implements Runnable{
 					socket.close();
 				}
 				catch (Exception e){
-					System.out.println("3");
+					e.printStackTrace();
 				}
 			}
   

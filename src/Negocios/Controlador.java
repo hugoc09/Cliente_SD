@@ -84,19 +84,6 @@ public class Controlador implements ControlCliente {
 		
 		return boo;
 	}
-	
-
-	public void pararBusca() {
-		try {
-			
-			packetUDP.stop();
-			
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
-	}
-
 
 	public void inicializar(IP ipParametro) throws Exception {
 		

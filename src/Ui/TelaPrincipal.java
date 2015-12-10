@@ -21,7 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-ControlCliente  control;
+	ControlCliente  control;
 	
     public TelaPrincipal() {
         initComponents();
