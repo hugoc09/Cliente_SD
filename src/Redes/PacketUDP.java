@@ -21,14 +21,12 @@ public class PacketUDP implements Runnable{
 	private Control control;
 	
 	private boolean inicializado;
-	private boolean executando;
 
 	private Thread  thread;
 	
 	public PacketUDP() throws Exception{
 		control = new Pesquisa();
 		inicializado = false;
-		executando   = false;
 
 		open();
 	}
@@ -62,26 +60,21 @@ public class PacketUDP implements Runnable{
 		clientSocket = null;
 		
 		control = null;
-		
-		inicializado = false;
-		executando   = false;
 
 		thread = null;
 
 	}
 	
 	public void start() {
-		if (!inicializado || executando) {
+		if (!inicializado) {
 			return;
 		}
 
-		executando = true;
 		thread = new Thread(this);
 		thread.start();
 	}
 
 	public void stop() throws Exception{
-		executando = false;
 		
 		if (thread != null) {
 			thread.join();
